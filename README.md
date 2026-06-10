@@ -157,3 +157,21 @@ make dbt-test     # dbt tests (requires running Postgres + data)
 ## License
 
 MIT
+
+## Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Python | ELT Scripting |
+| PostgreSQL | Warehouse |
+| Metabase | Visualization |
+| Docker | Containerization |
+
+## Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Python | ELT Scripting |
+| PostgreSQL | Warehouse |
+| Metabase | Visualization |
+| Docker | Containerization |
