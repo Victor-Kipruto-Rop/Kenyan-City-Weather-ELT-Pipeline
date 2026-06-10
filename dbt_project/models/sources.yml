@@ -1,0 +1,35 @@
+version: 2
+
+sources:
+  - name: weather_raw
+    description: Hourly weather observations loaded from Open-Meteo
+    schema: public
+    tables:
+      - name: raw_weather
+        description: Raw hourly weather for Kenyan cities
+        loaded_at_field: ingested_at
+        freshness:
+          warn_after: {count: 26, period: hour}
+          error_after: {count: 48, period: hour}
+        columns:
+          - name: city
+            description: Kenyan city name
+            tests:
+              - not_null
+              - accepted_values:
+                  arguments:
+                    values: ['Nairobi', 'Mombasa', 'Eldoret']
+          - name: timestamp
+            description: Observation timestamp in Africa/Nairobi timezone
+            tests:
+              - not_null
+          - name: temperature
+            description: Air temperature at 2m (°C)
+          - name: precipitation
+            description: Hourly precipitation (mm)
+          - name: windspeed
+            description: Wind speed at 10m (km/h)
+          - name: ingested_at
+            description: UTC timestamp when the record was loaded
+            tests:
+              - not_null

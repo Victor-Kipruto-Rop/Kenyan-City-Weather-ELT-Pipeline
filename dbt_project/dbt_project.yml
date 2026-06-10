@@ -1,0 +1,15 @@
+name: weather_pipeline
+version: "1.0.0"
+profile: weather_pipeline
+model-paths: ["models"]
+test-paths: ["tests"]
+macro-paths: ["macros"]
+
+models:
+  weather_pipeline:
+    staging:
+      +materialized: view
+    intermediate:
+      +materialized: view
+    marts:
+      +materialized: table

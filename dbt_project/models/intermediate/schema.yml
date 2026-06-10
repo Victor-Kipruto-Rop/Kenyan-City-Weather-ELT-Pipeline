@@ -1,0 +1,29 @@
+version: 2
+
+models:
+  - name: int_daily_averages
+    description: Daily weather aggregates per city
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - city
+              - day
+    columns:
+      - name: city
+        tests:
+          - not_null
+      - name: day
+        tests:
+          - not_null
+      - name: avg_temp_c
+        tests:
+          - not_null
+      - name: hourly_readings
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 1
+                max_value: 24
+                inclusive: true

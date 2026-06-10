@@ -1,0 +1,21 @@
+version: 2
+
+models:
+  - name: weekly_trends
+    description: Weekly weather trend metrics for dashboarding
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - city
+              - week_start
+    columns:
+      - name: city
+        tests:
+          - not_null
+      - name: week_start
+        tests:
+          - not_null
+      - name: weekly_avg_temp_c
+        tests:
+          - not_null

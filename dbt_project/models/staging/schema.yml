@@ -1,0 +1,45 @@
+version: 2
+
+models:
+  - name: stg_weather
+    description: Cleaned hourly weather observations
+    tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - city
+              - observed_at
+    columns:
+      - name: city
+        tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values: ['Nairobi', 'Mombasa', 'Eldoret']
+      - name: observed_at
+        tests:
+          - not_null
+      - name: temperature_c
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: -5
+                max_value: 45
+                inclusive: true
+      - name: precipitation_mm
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 200
+                inclusive: true
+      - name: windspeed_kmh
+        tests:
+          - not_null
+          - dbt_utils.accepted_range:
+              arguments:
+                min_value: 0
+                max_value: 150
+                inclusive: true
